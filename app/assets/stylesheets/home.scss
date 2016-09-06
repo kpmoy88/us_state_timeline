@@ -1,0 +1,187 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Web Page Title */
+.title_container {
+  background-image: image-url("us_banner_top_rsz.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  .web_title {
+    text-align: center;
+    color: rgb(255,215,0);
+    text-shadow: 
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+@media (min-width: 500px) {
+  .title_container {
+    background-size: 100%;
+    .web_title {
+      font-size: 2.5em;
+    }
+  }
+}
+@media (min-width: 946px) {
+  .title_container {
+        height: 70px;
+    .web_title {
+      font-size: 3em;
+    }
+  }
+}
+
+/* Map Image */
+.map_image {
+    width: 100%;
+    height: auto;
+}
+.map_image_hide {
+	display: none;
+}
+@media (min-width: 600px) {
+  .map_section {
+    width: 590px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Timeline Section */
+.timeline_section {
+  white-space: nowrap;
+ 	overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #e9f0f5;
+}
+
+.timeline_flex {
+	display: flex;
+	flex-direction: row;
+}
+
+/* Timeline Block */
+ .timeline_block {
+  vertical-align: top;
+  //background-color: #FFF;
+  text-align: center;
+  margin: 10px 0px 10px 30px;
+	min-width: 200px;
+	 &.tb_state, &.tb_last {
+		 display: none;
+	 }
+}
+
+.tc_container {
+	padding: 2% 0;
+}
+
+.timeline_content {
+	background-color: #d7e4ed;
+
+	&.tc_first, &.tc_last {
+		line-height: 100px;
+		padding: 10% 0;
+	}
+	&.tc_state {
+		width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	&.tc_last {
+		margin-right: 30px;
+	}
+}
+
+.circle{
+	content:"";
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background: blue;
+	border: 2.5px solid red;
+	margin-left: auto;
+  margin-right: auto;
+	.fa-star{
+		color: white;
+		margin-top: 10px;
+	}
+	.num_state {
+		display: block;
+		color: red;
+		font-size: 20px;
+		margin-top: -35px;
+    font-weight: bold;
+	}
+}
+
+.timeline_date {
+	margin-top: 10px;
+}
+
+.state_name {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 10px;
+	padding: 15px;
+}
+
+#timeline_interactive {
+	text-align: center;
+	margin-top: 10px;
+	.btn_area {
+		vertical-align: top;
+		.timeline_btn {
+			background-color: blue;
+			color: white;
+			padding: 10px;
+			border-radius: 10px;
+		}
+		#prevUSstate {
+			margin-right: 10px;
+		}
+		.autoplay_area {
+			margin-top: 10px;
+		}
+	}
+	
+	.ddl_area {
+		margin-top: 10px;
+		padding-bottom: 10px;
+		#quickSelector {
+			width: 90%;
+			max-width: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			border-width: 2px;
+			border-style: groove;
+			border-color: black;
+			text-align: left;
+			.ddl_title_area {
+				margin: 5px;
+    		text-transform: uppercase;
+			}
+			.ddl_state_area, .ddl_number_area {
+				margin: 10px;
+				display: inline-block;
+				p {
+					margin-bottom: 5px;
+				}
+			}
+		}
+	}
+	@media (min-width: 570px) {
+		.btn_area, .ddl_area {
+			display: inline-block;
+		}
+	}
+}
+

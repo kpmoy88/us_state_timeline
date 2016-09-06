@@ -1,0 +1,118 @@
+/* line 5, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+.title_container {
+  background-image: url(/assets/us_banner_top_rsz-26c0d8de9221081682897785720d448f78aa80fb41e3e2c76b26a2bb4e220198.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+/* line 9, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+.title_container .web_title {
+  text-align: center;
+  color: gold;
+  text-shadow: -1px -1px 0 #000,   1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (min-width: 403px) {
+  /* line 25, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+  .title_container {
+    background-size: 100%;
+  }
+  /* line 27, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+  .title_container .web_title {
+    font-size: 2.5em;
+    padding-top: 10px;
+  }
+}
+@media (min-width: 897px) {
+  /* line 34, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+  .title_container {
+    height: 100px;
+  }
+  /* line 36, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+  .title_container .web_title {
+    font-size: 3em;
+    padding-top: 20px;
+  }
+}
+/* line 43, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+.map_image {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 753px) {
+  /* line 48, /home/cabox/workspace/us_state_timeline/app/assets/stylesheets/home.scss */
+  .map_section {
+    width: 50%;
+    float: left;
+  }
+}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
