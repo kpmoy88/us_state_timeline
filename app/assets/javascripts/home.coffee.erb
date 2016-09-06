@@ -63,6 +63,7 @@ nextStateSlide = ->
   curState++
   $('.timeline_section').animate { scrollLeft: '+=230' }, 100
   $('.map_image').attr src: "<%= asset_path('us_" + curState + ".gif') %>"
+  $('#testText').text "<%= asset_path('us_" + curState + ".gif') %>"
   return
 
 #Changes map image, current state number and changes classes on state
