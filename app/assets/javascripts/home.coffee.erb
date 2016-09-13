@@ -15,14 +15,20 @@ $(document).ready ->
   $('#nextUSstate').click ->
     if curState < 50
       nextStateSlide()
+      $('#prevUSstate').prop 'disabled', false      
     return
   return
 
 #Go to previous state in timeline and remove current displayed state
 $(document).ready ->
   $('#prevUSstate').click ->
+    console.log "curState: " + curState
     if curState > 0
        prevStateSlide()
+       if curState == 0
+          $('#prevUSstate').prop 'disabled', true
+          $('.map_image').attr 'src', $('.tc_first').data('map-image')
+       return
     return
   return
 
@@ -39,14 +45,13 @@ nextStateSlide = ->
 
 #Changes map image, current state number and changes classes on state
 prevStateSlide = ->
-  last = $('.tb_state.visible').last()
-  last.removeClass ' visible '
-  last.addClass ' not-visible '
-  last.toggle()
-  curState--
-  #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
-  $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
-  return
+   last = $('.tb_state.visible').last()
+   last.removeClass ' visible '
+   last.addClass ' not-visible '
+   last.toggle()
+   curState--
+   #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
+   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
 
 #Variable for stopping interval
 intervalHolder = undefined
@@ -56,12 +61,27 @@ $(document).ready ->
   $('#playUSstate').click ->
     if curState < 50
       intervalHolder = setInterval(nextStateSlide, 1000)
+      $('#playUSstate').prop 'disabled', true
+      $('#prevUSstate').prop 'disabled', true
+      $('#nextUSstate').prop 'disabled', true
+      $('#stopUSstate').prop 'disabled', false
     return
   return
 #Stops autoplay of state timeline
 $(document).ready ->
   $('#stopUSstate').click ->
     clearInterval intervalHolder
+    $('#playUSstate').prop 'disabled', false
+    $('#prevUSstate').prop 'disabled', false
+    $('#nextUSstate').prop 'disabled', false
+    $('#stopUSstate').prop 'disabled', true
+    return
+  return
+      
+$(document).ready ->      
+  $('.timeline_section').scroll ->
+    if curState == 50 and $('#scrollquestion').get(0).scrollWidth - $('#scrollquestion').scrollLeft() == $('#scrollquestion').outerWidth()
+      alert 'right end'
     return
   return
 
@@ -82,6 +102,7 @@ $(document).ready ->
     if $('#ddl_states_name').val() > curState
       nextDistance = $('#ddl_states_name').val() - curState
       QuickState nextStateSlide, nextDistance
+      $('#prevUSstate').prop 'disabled', false
     else
       prevDistance = curState - $('#ddl_states_name').val()
       QuickState prevStateSlide, prevDistance
@@ -93,6 +114,7 @@ $(document).ready ->
     if $('#ddl_states_num').val() > curState
       nextDistance = $('#ddl_states_num').val() - curState
       QuickState nextStateSlide, nextDistance
+      $('#prevUSstate').prop 'disabled', false
     else
       prevDistance = curState - $('#ddl_states_num').val()
       QuickState prevStateSlide, prevDistance

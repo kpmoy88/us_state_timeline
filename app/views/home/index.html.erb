@@ -10,7 +10,7 @@
 		<div class="timeline_flex">
 			<div class="timeline_block tb_first">
 				<div class="tc_container">
-					<div class="timeline_content tc_first">
+					<%= tag("div", class: ["timeline_content", "tc_first"], :data => {:map_image => asset_path( "us_0.gif" )}) %>
 						US before 1787
 					</div>
 				</div>
@@ -41,15 +41,15 @@
 <section id="timeline_interactive">
 	<div class="btn_area">
 		<div>
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "prevUSstate", remote: true) do %>
+		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "prevUSstate", :disabled => true) do %>
 			<i class="fa fa-arrow-left" aria-hidden="true"></i> Previous State
 		<% end %>
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "nextUSstate", remote: true) do %>
+		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "nextUSstate") do %>
 			Next State <i class="fa fa-arrow-right" aria-hidden="true"></i>
 		<% end %>
 		</div>
 		<div class="autoplay_area">
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "stopUSstate") do %>
+		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "stopUSstate", :disabled => true) do %>
 			<i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop
 		<% end %>
 		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "playUSstate") do %>
