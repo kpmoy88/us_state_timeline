@@ -5,34 +5,6 @@
 #Current state number
 curState = 0
 
-###Set Timeline width to Scroll Width
-setScrollWidth = ->
-    timelineWidth = document.getElementById('timeline_container').scrollWidth
-    #document.getElementById('kw_container').style.width = timelineWidth + 'px'
-    return
-###
-
-###Display scrollWidth to HTML element
-getScrollWidth = ->
-  timelineWidth = document.getElementById('timeline_container').scrollWidth
-  document.getElementById('timeline_width').innerHTML = timelineWidth
-  return
-###
-
-###
-window.onload = ->
-  #getScrollWidth()
-  setScrollWidth()
-  return
-###
-###
-$(window).load ->
-  i = 1
-  while i < 50
-    $('<img />').attr 'src', 'assets/us_' + curState + '.gif'
-    i++
-  return
-###
 #Set horizontal scrollbar to end
 $(window).resize ->
   $('.timeline_section').scrollLeft document.getElementById('timeline_container').scrollWidth
@@ -73,7 +45,7 @@ prevStateSlide = ->
   last.toggle()
   curState--
   #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
-  $('.map_image').attr 'src', 'assets/us_' + curState + '.gif'
+  $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
   return
 
 #Variable for stopping interval
@@ -82,7 +54,8 @@ intervalHolder = undefined
 #Goes through state timeline without user input
 $(document).ready ->
   $('#playUSstate').click ->
-    intervalHolder = setInterval(nextStateSlide, 1000)
+    if curState < 50
+      intervalHolder = setInterval(nextStateSlide, 1000)
     return
   return
 #Stops autoplay of state timeline
@@ -126,36 +99,3 @@ $(document).ready ->
     return
   return
 
-
-###
-$(document).ready ->
-  $('#playUSstate').click ->
-    mapSlideshow = undefined
-
-    mapSlideshow = ->
-      first = undefined
-      if curPlay = false
-        return false
-      first = $('.tb_state.not-visible').first()
-      first.removeClass ' not-visible '
-      first.addClass ' visible '
-      first.toggle()
-      if curState < 50
-        $('.timeline_section').animate { scrollLeft: '+=230' }, 2000, ->
-          console.log 'Curstate: ' + curState
-          curState++
-          $('.map_image').attr 'src', 'assets/us_' + curState + '.gif'
-          mapSlideshow()
-          return
-      return
-
-    mapSlideshow()
-    return
-  return
-
-$(document).ready ->
-  $('#stopUSstate').click ->
-    curPlay = false
-    return
-  return
-###
