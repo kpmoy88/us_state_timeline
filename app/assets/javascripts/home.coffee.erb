@@ -64,6 +64,8 @@ $(document).ready ->
       $('#playUSstate').prop 'disabled', true
       $('#prevUSstate').prop 'disabled', true
       $('#nextUSstate').prop 'disabled', true
+      $("#ddl_states_name").prop 'disabled', true
+      $("#ddl_states_num").prop 'disabled', true
       $('#stopUSstate').prop 'disabled', false
     return
   return
@@ -74,6 +76,8 @@ $(document).ready ->
     $('#playUSstate').prop 'disabled', false
     $('#prevUSstate').prop 'disabled', false
     $('#nextUSstate').prop 'disabled', false
+    $("#ddl_states_name").prop 'disabled', false
+    $("#ddl_states_num").prop 'disabled', false
     $('#stopUSstate').prop 'disabled', true
     return
   return
