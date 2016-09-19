@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
    
-    @page = File.open("app/assets/data/us_states.xml") { |f| Nokogiri::XML(f) }
+    @states = File.open("app/assets/data/us_states.xml") { |f| Nokogiri::XML(f) }
   end
 
 end

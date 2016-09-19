@@ -15,18 +15,17 @@ $(document).ready ->
   $('#nextUSstate').click ->
     if curState < 50
       nextStateSlide()
-      $('#prevUSstate').prop 'disabled', false      
+      turnOnButtons()
     return
   return
 
 #Go to previous state in timeline and remove current displayed state
 $(document).ready ->
   $('#prevUSstate').click ->
-    console.log "curState: " + curState
     if curState > 0
        prevStateSlide()
+       turnOnButtons()
        if curState == 0
-          $('#prevUSstate').prop 'disabled', true
           $('.map_image').attr 'src', $('.tc_first').data('map-image')
        return
     return
@@ -52,6 +51,7 @@ prevStateSlide = ->
    curState--
    #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
    $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
+   return
 
 #Variable for stopping interval
 intervalHolder = undefined
@@ -61,31 +61,12 @@ $(document).ready ->
   $('#playUSstate').click ->
     if curState < 50
       intervalHolder = setInterval(nextStateSlide, 1000)
-      $('#playUSstate').prop 'disabled', true
-      $('#prevUSstate').prop 'disabled', true
-      $('#nextUSstate').prop 'disabled', true
-      $("#ddl_states_name").prop 'disabled', true
-      $("#ddl_states_num").prop 'disabled', true
-      $('#stopUSstate').prop 'disabled', false
     return
   return
 #Stops autoplay of state timeline
 $(document).ready ->
   $('#stopUSstate').click ->
     clearInterval intervalHolder
-    $('#playUSstate').prop 'disabled', false
-    $('#prevUSstate').prop 'disabled', false
-    $('#nextUSstate').prop 'disabled', false
-    $("#ddl_states_name").prop 'disabled', false
-    $("#ddl_states_num").prop 'disabled', false
-    $('#stopUSstate').prop 'disabled', true
-    return
-  return
-      
-$(document).ready ->      
-  $('.timeline_section').scroll ->
-    if curState == 50 and $('#scrollquestion').get(0).scrollWidth - $('#scrollquestion').scrollLeft() == $('#scrollquestion').outerWidth()
-      alert 'right end'
     return
   return
 
@@ -96,6 +77,7 @@ QuickState = (callback, repetitions) ->
     callback()
     if ++x == repetitions
       window.clearInterval intervalID
+      turnOnButtons()
     return
   ), 100)
   return
@@ -103,25 +85,88 @@ QuickState = (callback, repetitions) ->
 #Jump to the selected state when user selects state name from dropdown list
 $(document).ready ->
   $('#ddl_states_name').change ->
+    disableButtons()
     if $('#ddl_states_name').val() > curState
       nextDistance = $('#ddl_states_name').val() - curState
       QuickState nextStateSlide, nextDistance
-      $('#prevUSstate').prop 'disabled', false
     else
       prevDistance = curState - $('#ddl_states_name').val()
       QuickState prevStateSlide, prevDistance
     return
-  return
-  #Jump to the selected state when user selects number from dropdown list
+  return  
+#Jump to the selected state when user selects number from dropdown list
 $(document).ready ->
   $('#ddl_states_num').change ->
+    disableButtons()
     if $('#ddl_states_num').val() > curState
       nextDistance = $('#ddl_states_num').val() - curState
       QuickState nextStateSlide, nextDistance
-      $('#prevUSstate').prop 'disabled', false
     else
       prevDistance = curState - $('#ddl_states_num').val()
       QuickState prevStateSlide, prevDistance
     return
   return
 
+#Disable all buttons depending on curState position
+disableButtons = ->
+  console.log "Disabled Buttons"
+  $('#playUSstate').prop 'disabled', true
+  $('#prevUSstate').prop 'disabled', true
+  $('#nextUSstate').prop 'disabled', true
+  $("#ddl_states_name").prop 'disabled', true
+  $("#ddl_states_num").prop 'disabled', true
+  $('#stopUSstate').prop 'disabled', true
+      
+#Turn on or off buttons depending on curState position
+turnOnButtons = ->
+  if curState == 0
+    $('#playUSstate').prop 'disabled', false
+    $('#prevUSstate').prop 'disabled', true
+    $('#nextUSstate').prop 'disabled', false
+    $("#ddl_states_name").prop 'disabled', false
+    $("#ddl_states_num").prop 'disabled', false
+    $('#stopUSstate').prop 'disabled', true
+  else if curState == 1
+    $('#playUSstate').prop 'disabled', false
+    $('#prevUSstate').prop 'disabled', false
+    $('#nextUSstate').prop 'disabled', false
+    $("#ddl_states_name").prop 'disabled', false
+    $("#ddl_states_num").prop 'disabled', false
+    $('#stopUSstate').prop 'disabled', true
+  else if curState == 50
+    $('#playUSstate').prop 'disabled', true
+    $('#prevUSstate').prop 'disabled', false
+    $('#nextUSstate').prop 'disabled', true
+    $("#ddl_states_name").prop 'disabled', false
+    $("#ddl_states_num").prop 'disabled', false
+    $('#stopUSstate').prop 'disabled', true
+  else
+    $('#playUSstate').prop 'disabled', false
+    $('#prevUSstate').prop 'disabled', false
+    $('#nextUSstate').prop 'disabled', false
+    $("#ddl_states_name").prop 'disabled', false
+    $("#ddl_states_num").prop 'disabled', false
+    $('#stopUSstate').prop 'disabled', true
+      
+#Modal Javascript    
+$(document).ready ->
+  $('.state_btn').click ->
+    console.log $(this).data('state-id')
+    document.getElementById('modal_state_name').innerHTML = $('#state_el_' + $(this).data('state-id')).data('state-name')
+    $('#modal_state_img').attr 'src', $('#state_el_' + curState).data('state-image')
+    document.getElementById('stateModal').style.display = 'block'
+    return
+  return
+    
+$(document).ready ->
+  $('#closeX').click ->
+    document.getElementById('stateModal').style.display = "none";
+    return
+  return
+    
+$(document).ready ->
+  window.onclick = (event) ->
+    if event.target == document.getElementById('stateModal')
+      document.getElementById('stateModal').style.display = 'none'
+    return
+  return

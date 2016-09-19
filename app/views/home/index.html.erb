@@ -1,7 +1,7 @@
 <div class="title_container"><h1 class="web_title">U.S. States by Date of Admission to the Union</h1></div>
 <section class="map_section">
 	<%= image_tag( asset_path("us_0.gif"), :alt => "us_map", class: "map_image") %>
-	<% @page.xpath('//state').each do | state_element | %>
+	<% @states.xpath('//state').each do | state_element | %>
   	<%= image_tag("us_" + state_element.xpath('number').text + ".gif", :alt => "us_map", class: "map_image_hide") %>
 	<% end %>
 </section>
@@ -15,9 +15,8 @@
 					</div>
 				</div>
 			</div>
-   		<% @page.xpath('//state').each do | state_element | %>
-			<%= tag("div", id: "state_el_" + state_element.xpath('number').text, class: ["timeline_block", "tb_state", "not-visible"], :data => {:state_image => state_element.xpath('image_name').text, :map_image => asset_path( "us_" + state_element.xpath('number').text + ".gif" )}) %>
-    	<!--div class="timeline_block tb_state not-visible"-->
+   		<% @states.xpath('//state').each do | state_element | %>
+			<%= tag("div", id: "state_el_" + state_element.xpath('number').text, class: ["timeline_block", "tb_state", "not-visible"], :data => { :state_name => state_element.xpath('name').text ,:state_image => asset_path( state_element.xpath('state_image').text ), :map_image => asset_path( "us_" + state_element.xpath('number').text + ".gif" )}) %>
 				<div class="circle"><i class="fa fa-star" aria-hidden="true"></i><span class="num_state"><%= state_element.xpath('number').text %></span></div>
       	<div class="timeline_date">
           	<%= state_element.xpath('month').text %> <%= state_element.xpath('day').text %>, <%= state_element.xpath('year').text %>
@@ -25,6 +24,9 @@
       	<div class="timeline_content tc_state">
 					<!--%= image_tag( state_element.xpath('state_image').text) %-->
 					<p class="state_name"><%= state_element.xpath('name').text %></p>
+					<%= button_tag(:class => "state_btn", :type => "button", :data => {state_id: state_element.xpath('number').text} ) do %>
+						<i class="fa fa-info-circle" aria-hidden="true"></i> More Info
+					<% end %>
       	</div>
    		</div>
    		<% end %>
@@ -64,7 +66,7 @@
 				<p>Jump to a State</p>
 				<select id="ddl_states_name">
 					<option value="" selected="selected" disabled>Select a State</option>
-      		<%= @page.xpath('//state').sort_by{ |a| a.xpath('name').text }.each do | state_element | %>
+      		<%= @states.xpath('//state').sort_by{ |a| a.xpath('name').text }.each do | state_element | %>
         		<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('name').text %></option>
       		<% end %>
     		</select>
@@ -73,11 +75,18 @@
 				<p>Jump to the ______ State</p>
 				<select id="ddl_states_num">
 					<option value="" selected="selected" disabled>Select a Number</option>
-      		<%= @page.xpath('//state').sort_by{ |a| a.xpath('number').text.to_i }.each do | state_element | %>
+      		<%= @states.xpath('//state').sort_by{ |a| a.xpath('number').text.to_i }.each do | state_element | %>
         		<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('number').text %></option>
       		<% end %>
     		</select>
 			</div>
 		</fieldset>
+	</div>
+	<div id="stateModal" class="modal">
+  	<div class="modal_content">
+    	<span id="closeX" class="close"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+    	<p id="modal_state_name"></p>
+			<img id="modal_state_img" />
+  	</div>
 	</div>
 </section>
