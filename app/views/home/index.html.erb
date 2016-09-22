@@ -27,7 +27,7 @@
 				</div>
 			</div>
    		<% @states.xpath('//state').each do | state_element | %>
-			<%= tag("div", id: "state_el_" + state_element.xpath('number').text, class: ["timeline_block", "tb_state", "not-visible"], :data => { :state_name => state_element.xpath('name').text ,:state_image => asset_path( state_element.xpath('state_image').text ), :map_image => asset_path( "us_" + state_element.xpath('number').text + ".gif" )}) %>
+			<%= tag("div", id: "state_el_" + state_element.xpath('number').text, class: ["timeline_block", "tb_state", "not-visible"], :data => { :state_name => state_element.xpath('name').text ,:state_image => asset_path( state_element.xpath('state_image').text  + ".jpg" ), :map_image => asset_path( "us_" + state_element.xpath('number').text + ".gif" )}) %>
 				<div class="circle"><i class="fa fa-star" aria-hidden="true"></i><span class="num_state"><%= state_element.xpath('number').text %></span></div>
       	<div class="timeline_date">
           	<%= state_element.xpath('month').text %> <%= state_element.xpath('day').text %>, <%= state_element.xpath('year').text %>
