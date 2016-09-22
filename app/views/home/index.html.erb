@@ -5,12 +5,23 @@
   	<%= image_tag("us_" + state_element.xpath('number').text + ".gif", :alt => "us_map", class: "map_image_hide") %>
 	<% end %>
 </section>
+<section class="timeline_start">
+	<div class="tl_container">
+		<div class="start_flex">
+				<div class="start_container">
+					<%= tag("div", class: ["timeline_content tc_end"]) %>
+							US before 1787
+					</div>
+				</div>
+		</div>
+	</div>
+</section>
 <section class="timeline_section">
-  <div id="timeline_container">
+  <div id="timeline_container" class="tl_container">
 		<div class="timeline_flex">
-			<div class="timeline_block tb_first">
+			<div class="timeline_block tb_first tb_end">
 				<div class="tc_container">
-					<%= tag("div", class: ["timeline_content", "tc_first"], :data => {:map_image => asset_path( "us_0.gif" )}) %>
+					<%= tag("div", class: ["timeline_content", "tc_first", "tc_end"], :data => {:map_image => asset_path( "us_0.gif" )}) %>
 						US before 1787
 					</div>
 				</div>
@@ -22,7 +33,7 @@
           	<%= state_element.xpath('month').text %> <%= state_element.xpath('day').text %>, <%= state_element.xpath('year').text %>
       	</div>
       	<div class="timeline_content tc_state">
-					<!--%= image_tag( state_element.xpath('state_image').text) %-->
+					<%= image_tag( state_element.xpath('state_image').text, class: "state_image") %>
 					<p class="state_name"><%= state_element.xpath('name').text %></p>
 					<%= button_tag(:class => "state_btn", :type => "button", :data => {state_id: state_element.xpath('number').text} ) do %>
 						<i class="fa fa-info-circle" aria-hidden="true"></i> More Info
@@ -30,7 +41,7 @@
       	</div>
    		</div>
    		<% end %>
-			<!--div class="timeline_block tb_last">
+			<!--div class="timeline_block tb_last tc_end">
 				<div class="tc_container">
 					<div class="timeline_content tc_last">
 						Current Map Displayed
@@ -41,52 +52,61 @@
   </div>
 </section>
 <section id="timeline_interactive">
-	<div class="btn_area">
-		<div>
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "prevUSstate", :disabled => true) do %>
-			<i class="fa fa-arrow-left" aria-hidden="true"></i> Previous State
+	<div class="start_area">
+		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "startTimeline") do %>
+			Start
 		<% end %>
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "nextUSstate") do %>
-			Next State <i class="fa fa-arrow-right" aria-hidden="true"></i>
-		<% end %>
+	</div>
+	<div class="interactive_area">
+		<div class="btn_area">
+			<div>
+				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "prevUSstate", :disabled => true) do %>
+					<i class="fa fa-arrow-left" aria-hidden="true"></i> Previous State
+				<% end %>
+				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "nextUSstate") do %>
+					Next State <i class="fa fa-arrow-right" aria-hidden="true"></i>
+				<% end %>
+			</div>
+			<div class="autoplay_area">
+				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "stopUSstate", :disabled => true) do %>
+					<i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop
+				<% end %>
+				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "playUSstate") do %>
+					<i class="fa fa-play-circle-o" aria-hidden="true"></i> Play 
+				<% end %>
+			</div>
 		</div>
-		<div class="autoplay_area">
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "stopUSstate", :disabled => true) do %>
-			<i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop
-		<% end %>
-		<%= button_tag(:class => "timeline_btn", :type => "button", :id => "playUSstate") do %>
-			<i class="fa fa-play-circle-o" aria-hidden="true"></i> Play 
-		<% end %>
-	</div>
-	</div>
-	<div class="ddl_area">
-		<fieldset id="quickSelector">
-			<legend class="ddl_title_area">Quick Selector</legend>
-			<div class="ddl_state_area">
-				<p>Jump to a State</p>
-				<select id="ddl_states_name">
-					<option value="" selected="selected" disabled>Select a State</option>
-      		<%= @states.xpath('//state').sort_by{ |a| a.xpath('name').text }.each do | state_element | %>
-        		<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('name').text %></option>
-      		<% end %>
-    		</select>
-			</div>
-			<div class="ddl_number_area">
-				<p>Jump to the ______ State</p>
-				<select id="ddl_states_num">
-					<option value="" selected="selected" disabled>Select a Number</option>
-      		<%= @states.xpath('//state').sort_by{ |a| a.xpath('number').text.to_i }.each do | state_element | %>
-        		<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('number').text %></option>
-      		<% end %>
-    		</select>
-			</div>
-		</fieldset>
-	</div>
-	<div id="stateModal" class="modal">
-  	<div class="modal_content">
-    	<span id="closeX" class="close"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
-    	<p id="modal_state_name"></p>
-			<img id="modal_state_img" />
-  	</div>
+		<div class="ddl_area">
+			<fieldset id="quickSelector">
+				<legend class="ddl_title_area">Quick Selector</legend>
+				<div class="ddl_state_area">
+					<p>Jump to a State</p>
+					<select id="ddl_states_name">
+						<option value="" selected="selected" disabled>Select a State</option>
+      			<%= @states.xpath('//state').sort_by{ |a| a.xpath('name').text }.each do | state_element | %>
+        			<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('name').text %></option>
+      			<% end %>
+    			</select>
+				</div>
+				<div class="ddl_number_area">
+					<p>Jump to the ______ State</p>
+					<select id="ddl_states_num">
+						<option value="" selected="selected" disabled>Select a Number</option>
+      			<%= @states.xpath('//state').sort_by{ |a| a.xpath('number').text.to_i }.each do | state_element | %>
+        			<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('number').text %></option>
+      			<% end %>
+    			</select>
+				</div>
+			</fieldset>
+		</div>
 	</div>
 </section>
+<div id="stateModal" class="modal">
+	<div class="modal_content">
+		<span id="closeX" class="close"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+		<p id="modal_state_name"></p>
+		<div class="modal_img_container">
+			<img id="modal_state_img" />
+		</div>
+	</div>
+</div>

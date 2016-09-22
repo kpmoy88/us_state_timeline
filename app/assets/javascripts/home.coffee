@@ -10,6 +10,16 @@ $(window).resize ->
   $('.timeline_section').scrollLeft document.getElementById('timeline_container').scrollWidth
   return
 
+#Start US State timeline
+$(document).ready ->
+  $('#startTimeline').click ->
+    $('.timeline_start').hide()
+    $('.timeline_section').show()
+    $('.start_area').hide()
+    $('.interactive_area').slideDown("slow");
+    return
+  return
+    
 #Display next state in timeline
 $(document).ready ->
   $('#nextUSstate').click ->
@@ -26,8 +36,9 @@ $(document).ready ->
        prevStateSlide()
        turnOnButtons()
        if curState == 0
+          console.log "In If"
           $('.map_image').attr 'src', $('.tc_first').data('map-image')
-       return
+          console.log "Completed If"
     return
   return
 
@@ -60,12 +71,16 @@ intervalHolder = undefined
 $(document).ready ->
   $('#playUSstate').click ->
     if curState < 50
+      disableButtons()
+      $('#stopUSstate').prop 'disabled', false
       intervalHolder = setInterval(nextStateSlide, 1000)
     return
   return
 #Stops autoplay of state timeline
 $(document).ready ->
   $('#stopUSstate').click ->
+    turnOnButtons()
+    $('#stopUSstate').prop 'disabled', true
     clearInterval intervalHolder
     return
   return

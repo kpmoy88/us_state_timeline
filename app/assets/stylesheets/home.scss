@@ -43,6 +43,7 @@
     width: 100%;
     height: auto;
 }
+/* Hide maps that are being preloaded  */
 .map_image_hide {
 	display: none;
 }
@@ -55,16 +56,37 @@
 }
 
 /* Timeline Section */
-.timeline_section {
+.timeline_start, .timeline_section {
   white-space: nowrap;
  	overflow-x: hidden;
   overflow-y: hidden;
   background-color: #e9f0f5;
 }
 
-.timeline_flex {
-	display: flex;
-	flex-direction: row;
+/* Initial timeline section */
+.timeline_start {
+	.tl_container, .start_flex, .start_container, .timeline_block, .tb_first {
+		height: 194px;
+	}
+	.start_container {
+		width: 200px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		padding: 20px 0px;
+	}
+}
+
+.timeline_section {
+	display: none; //Initial setting
+	/* Allows timeline section to be horizontal */
+	.timeline_flex {
+		display: flex;
+		flex-direction: row;
+	}
+	.tc_container {
+		padding: 2% 0;
+	}
 }
 
 /* Timeline Block */
@@ -79,27 +101,7 @@
 	 }
 }
 
-.tc_container {
-	padding: 2% 0;
-}
-
-.timeline_content {
-	background-color: #d7e4ed;
-
-	&.tc_first, &.tc_last {
-		line-height: 100px;
-		padding: 10% 0;
-	}
-	&.tc_state {
-		width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-	}
-	&.tc_last {
-		margin-right: 30px;
-	}
-}
-
+/* State circle with numbered Star */
 .circle{
 	content:"";
 	width: 50px;
@@ -125,15 +127,38 @@
 
 .timeline_date {
 	margin-top: 10px;
+	font-weight: bold;
 }
 
+.timeline_content {
+	background-color: #d7e4ed;
+
+	&.tc_end {
+		line-height: 100px;
+		padding: 10% 0;
+	}
+	&.tc_state {
+		width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	&.tc_last {
+		margin-right: 30px;
+	}
+}
+
+.state_image {
+	width: 50%;
+	margin-top: 10px;
+}
 .state_name {
 	font-weight: bold;
 	font-size: 20px;
 	margin: 10px;
-	padding: 15px;
+	padding: 5px;
 }
 
+/* More info button in state content */
 .state_btn {
 	margin-bottom: 10px;
 	background-color: red;
@@ -142,9 +167,24 @@
 	border-radius: 10px;
 }
 
+/* User Interactive area with buttons and drop down list */
 #timeline_interactive {
 	text-align: center;
 	margin-top: 10px;
+	/* Initial startup area */
+	.start_area {
+		.timeline_btn {
+			background-color: blue;
+			color: white;
+			padding: 10px;
+			border-radius: 10px;
+			width: 200px;
+		}
+	}
+	/*  */
+	.interactive_area {
+		display: none; //Initial setting
+	}
 	.btn_area {
 		vertical-align: top;
 		.timeline_btn {
@@ -210,18 +250,34 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
+/* Modal Content */
 .modal_content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	#modal_state_name {
+		text-align: center;
+		font-weight: bold;
+		font-size: 2em;
+	}
+	.modal_img_container {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10px;
+		text-align: center;
+		
+		#modal_state_img {
+			max-width: 100%;
+		}
+	}
 }
 @media (min-width: 600px) {
 	.modal_content {
 		margin: 10% auto;
-		max-width: 600px;
+		max-width: 400px;
 	}
 }
 
@@ -233,18 +289,8 @@
 		margin-top:-25px;
     margin-right:-25px;
 }
-
 .close:hover,
 .close:focus {
     color: black;
     cursor: pointer;
 }
-
-#modal_state_name {
-	font-weight: bold;
-	font-size: 2em;
-}
-#modal_state_img {
-	max-width: 100%;
-}
-
