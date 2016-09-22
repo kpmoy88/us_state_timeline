@@ -33,7 +33,7 @@
           	<%= state_element.xpath('month').text %> <%= state_element.xpath('day').text %>, <%= state_element.xpath('year').text %>
       	</div>
       	<div class="timeline_content tc_state">
-					<%= image_tag( state_element.xpath('state_image').text, class: "state_image") %>
+					<%= image_tag( asset_path(state_element.xpath('state_image').text), class: "state_image") %>
 					<p class="state_name"><%= state_element.xpath('name').text %></p>
 					<%= button_tag(:class => "state_btn", :type => "button", :data => {state_id: state_element.xpath('number').text} ) do %>
 						<i class="fa fa-info-circle" aria-hidden="true"></i> More Info
