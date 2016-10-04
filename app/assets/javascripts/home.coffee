@@ -134,51 +134,48 @@ disableButtons = ->
       
 #Turn on or off buttons depending on curState position
 turnOnButtons = ->
+  $("#ddl_states_name").prop 'disabled', false
+  $("#ddl_states_num").prop 'disabled', false
+  $('#stopUSstate').prop 'disabled', true
   if curState == 0
     $('#playUSstate').prop 'disabled', false
     $('#prevUSstate').prop 'disabled', true
     $('#nextUSstate').prop 'disabled', false
-    $("#ddl_states_name").prop 'disabled', false
-    $("#ddl_states_num").prop 'disabled', false
-    $('#stopUSstate').prop 'disabled', true
-  else if curState == 1
-    $('#playUSstate').prop 'disabled', false
-    $('#prevUSstate').prop 'disabled', false
-    $('#nextUSstate').prop 'disabled', false
-    $("#ddl_states_name").prop 'disabled', false
-    $("#ddl_states_num").prop 'disabled', false
-    $('#stopUSstate').prop 'disabled', true
   else if curState == 50
     $('#playUSstate').prop 'disabled', true
     $('#prevUSstate').prop 'disabled', false
     $('#nextUSstate').prop 'disabled', true
-    $("#ddl_states_name").prop 'disabled', false
-    $("#ddl_states_num").prop 'disabled', false
-    $('#stopUSstate').prop 'disabled', true
   else
     $('#playUSstate').prop 'disabled', false
     $('#prevUSstate').prop 'disabled', false
     $('#nextUSstate').prop 'disabled', false
-    $("#ddl_states_name").prop 'disabled', false
-    $("#ddl_states_num").prop 'disabled', false
-    $('#stopUSstate').prop 'disabled', true
       
 #Modal Javascript    
 $(document).ready ->
   $('.state_btn').click ->
-    console.log $(this).data('state-id')
     document.getElementById('modal_state_name').innerHTML = $('#state_el_' + $(this).data('state-id')).data('state-name')
     $('#modal_state_img').attr 'src', $('#state_el_' + curState).data('state-image')
+    document.getElementById('modal_union_date').innerHTML = "<span>Entered Union:</span><br />" + $('#state_el_' + $(this).data('state-id')).data('enter-union')
+    $('#state_facts').attr 'href', $('#state_el_' + curState).data('facts-link')
     document.getElementById('stateModal').style.display = 'block'
     return
   return
+
+#Opens new tab with State's Facts on FactMonster
+$(document).ready ->
+  $('#state_facts').click ->
+    window.open $('#state_facts').attr('href'), '_blank'
+    return
+  return
     
+#Close modal dialog on x button
 $(document).ready ->
   $('#closeX').click ->
     document.getElementById('stateModal').style.display = "none";
     return
   return
     
+#Close modal dialog if user touches anywhere outside dialog box
 $(document).ready ->
   window.onclick = (event) ->
     if event.target == document.getElementById('stateModal')

@@ -181,10 +181,11 @@
 			width: 200px;
 		}
 	}
-	/*  */
+	/* User Control Area */
 	.interactive_area {
 		display: none; //Initial setting
 	}
+	/* Button Controls */
 	.btn_area {
 		vertical-align: top;
 		.timeline_btn {
@@ -203,7 +204,7 @@
 			margin-top: 10px;
 		}
 	}
-	
+	/* Drop Down List Controls */
 	.ddl_area {
 		margin-top: 10px;
 		padding-bottom: 10px;
@@ -272,6 +273,22 @@
 		#modal_state_img {
 			max-width: 100%;
 		}
+	}
+	#modal_union_date {
+		text-align: center;
+		margin: 10px;
+		span {
+			font-weight: bold;
+		}
+	}
+	#state_facts {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: red;
+		color: white;
+		padding: 10px;
+		border-radius: 10px;
 	}
 }
 @media (min-width: 600px) {
