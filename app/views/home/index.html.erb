@@ -18,6 +18,8 @@
 </section>
 <section class="timeline_section">
   <div id="timeline_container" class="tl_container">
+		<div id="tl_left_div" class="tl_arrow_container tl_left_container noshow"><a class="prevUSstate"><%= image_tag( asset_path("chevron-left.png"), :alt => "left_arrow", class: "left_arrow") %></a></div>
+		<div id="tl_right_div" class="tl_arrow_container tl_right_container noshow"><a class="nextUSstate"><%= image_tag( asset_path("chevron-right.png"), :alt => "right_arrow", class: "right_arrow") %></a></div>
 		<div class="timeline_flex">
 			<div class="timeline_block tb_first tb_end">
 				<div class="tc_container">
@@ -56,6 +58,7 @@
 				</div>
 			</div-->
 		</div>
+		
   </div>
 </section>
 <section id="timeline_interactive">
@@ -66,11 +69,11 @@
 	</div>
 	<div class="interactive_area">
 		<div class="btn_area">
-			<div>
-				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "prevUSstate", :disabled => true) do %>
+			<div class="non_mobile_buttons">
+				<%= button_tag(:class => "timeline_btn prevUSstate", :type => "button", :disabled => true) do %>
 					<i class="fa fa-arrow-left" aria-hidden="true"></i> Previous State
 				<% end %>
-				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "nextUSstate") do %>
+				<%= button_tag(:class => "timeline_btn nextUSstate", :type => "button") do %>
 					Next State <i class="fa fa-arrow-right" aria-hidden="true"></i>
 				<% end %>
 			</div>

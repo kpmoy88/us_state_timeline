@@ -89,6 +89,29 @@
 	}
 }
 
+.tl_arrow_container {
+	position: absolute;
+	transform: translateY(50%);
+	
+	&.tl_left_container {
+		left: 0;
+	}
+	&.tl_right_container {
+		right: 0;
+	}
+	.left_arrow, .right_arrow {
+		height: 84px;
+	}
+}
+.tl_left_container.deactivate, .tl_right_container.deactivate {
+	display: none;
+}
+@media (min-width: 1200px) {
+	.tl_left_container.noshow, .tl_right_container.noshow {
+		display: none;
+	}
+}
+
 /* Timeline Block */
  .timeline_block {
   vertical-align: top;
@@ -188,6 +211,9 @@
 	/* Button Controls */
 	.btn_area {
 		vertical-align: top;
+		.non_mobile_buttons {
+			display: none;
+		}
 		.timeline_btn {
 			background-color: blue;
 			color: white;
@@ -233,6 +259,11 @@
 	@media (min-width: 570px) {
 		.btn_area, .ddl_area {
 			display: inline-block;
+		}
+		.btn_area {
+			.non_mobile_buttons {
+				display: inline-block;
+			}
 		}
 	}
 }

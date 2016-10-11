@@ -16,13 +16,14 @@ $(document).ready ->
     $('.timeline_start').hide()
     $('.timeline_section').show()
     $('.start_area').hide()
-    $('.interactive_area').slideDown("slow");
+    $('.interactive_area').slideDown("slow")
+    $('#tl_left_div').addClass "deactivate"
     return
   return
     
 #Display next state in timeline
 $(document).ready ->
-  $('#nextUSstate').click ->
+  $('.nextUSstate').click ->
     if curState < 50
       nextStateSlide()
       turnOnButtons()
@@ -31,14 +32,12 @@ $(document).ready ->
 
 #Go to previous state in timeline and remove current displayed state
 $(document).ready ->
-  $('#prevUSstate').click ->
+  $('.prevUSstate').click ->
     if curState > 0
        prevStateSlide()
        turnOnButtons()
        if curState == 0
-          console.log "In If"
           $('.map_image').attr 'src', $('.tc_first').data('map-image')
-          console.log "Completed If"
     return
   return
 
@@ -126,29 +125,35 @@ $(document).ready ->
 disableButtons = ->
   console.log "Disabled Buttons"
   $('#playUSstate').prop 'disabled', true
-  $('#prevUSstate').prop 'disabled', true
-  $('#nextUSstate').prop 'disabled', true
-  $("#ddl_states_name").prop 'disabled', true
-  $("#ddl_states_num").prop 'disabled', true
+  $('.prevUSstate').prop 'disabled', true
+  $('.nextUSstate').prop 'disabled', true
+  $('#ddl_states_name').prop 'disabled', true
+  $('#ddl_states_num').prop 'disabled', true
   $('#stopUSstate').prop 'disabled', true
+  $('#tl_left_div').addClass "deactivate"
+  $('#tl_right_div').addClass "deactivate"
       
 #Turn on or off buttons depending on curState position
 turnOnButtons = ->
-  $("#ddl_states_name").prop 'disabled', false
-  $("#ddl_states_num").prop 'disabled', false
+  $('#ddl_states_name').prop 'disabled', false
+  $('#ddl_states_num').prop 'disabled', false
   $('#stopUSstate').prop 'disabled', true
+  $('#tl_left_div').removeClass "deactivate"
+  $('#tl_right_div').removeClass "deactivate"
   if curState == 0
     $('#playUSstate').prop 'disabled', false
-    $('#prevUSstate').prop 'disabled', true
-    $('#nextUSstate').prop 'disabled', false
+    $('.prevUSstate').prop 'disabled', true
+    $('.nextUSstate').prop 'disabled', false
+    $('#tl_left_div').addClass "deactivate"
   else if curState == 50
     $('#playUSstate').prop 'disabled', true
-    $('#prevUSstate').prop 'disabled', false
-    $('#nextUSstate').prop 'disabled', true
+    $('.prevUSstate').prop 'disabled', false
+    $('.nextUSstate').prop 'disabled', true
+    $('#tl_right_div').addClass "deactivate"
   else
     $('#playUSstate').prop 'disabled', false
-    $('#prevUSstate').prop 'disabled', false
-    $('#nextUSstate').prop 'disabled', false
+    $('.prevUSstate').prop 'disabled', false
+    $('.nextUSstate').prop 'disabled', false
       
 #Modal Javascript    
 $(document).ready ->
