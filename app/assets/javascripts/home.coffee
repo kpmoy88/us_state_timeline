@@ -50,30 +50,38 @@ nextStateSlide = ->
   curState++
   $('.timeline_section').animate { scrollLeft: '+=230' }, 100
   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
+  setQuickSelectValues()
   if curState == 50 
     stopAutoSlide()
   return
 
 #Changes map image, current state number and changes classes on state
 prevStateSlide = ->
-   last = $('.tb_state.visible').last()
-   last.removeClass ' visible '
-   last.addClass ' not-visible '
-   last.toggle()
-   curState--
-   #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
-   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
-   if curState == 0 
+  last = $('.tb_state.visible').last()
+  last.removeClass ' visible '
+  last.addClass ' not-visible '
+  last.toggle()
+  curState--
+  #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
+  $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
+  setQuickSelectValues()
+  if curState == 0 
     stopAutoSlide()
-   return
+  return
 
 #Stop autoplay or autoreverse
 stopAutoSlide = ->
-    turnOnButtons()
-    $('#stopUSstate').prop 'disabled', true
-    clearInterval intervalHolder
-    return
+  turnOnButtons()
+  $('#stopUSstate').prop 'disabled', true
+  clearInterval intervalHolder
+  return
   
+#Set dropdown lists with current State Name and Number
+setQuickSelectValues = ->
+  if curState <= 50 
+    $('#ddl_states_name').val curState
+    $('#ddl_states_num').val curState
+  return
 
 #Variable for stopping interval
 intervalHolder = undefined
@@ -90,9 +98,7 @@ $(document).ready ->
 #Stops autoplay of state timeline
 $(document).ready ->
   $('#stopUSstate').click ->
-    turnOnButtons()
-    $('#stopUSstate').prop 'disabled', true
-    clearInterval intervalHolder
+    stopAutoSlide()
     return
   return
 #Goes through state timeline without user input in reverse
@@ -144,7 +150,6 @@ $(document).ready ->
 
 #Disable all buttons depending on curState position
 disableButtons = ->
-  console.log "Disabled Buttons"
   $('#playUSstate').prop 'disabled', true
   $('#reverseUSstate').prop 'disabled', true
   $('.prevUSstate').prop 'disabled', true

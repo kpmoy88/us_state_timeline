@@ -95,7 +95,7 @@
 				<div class="ddl_state_area">
 					<p>Jump to a State</p>
 					<select id="ddl_states_name">
-						<option value="" selected="selected" disabled>Select a State</option>
+						<option value="0" selected="selected" disabled>Select a State</option>
       			<%= @states.xpath('//state').sort_by{ |a| a.xpath('name').text }.each do | state_element | %>
         			<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('name').text %></option>
       			<% end %>
@@ -104,7 +104,7 @@
 				<div class="ddl_number_area">
 					<p>Jump to the ______ State</p>
 					<select id="ddl_states_num">
-						<option value="" selected="selected" disabled>Select a Number</option>
+						<option value="0" selected="selected" disabled>Select a Number</option>
       			<%= @states.xpath('//state').sort_by{ |a| a.xpath('number').text.to_i }.each do | state_element | %>
         			<option value="<%= state_element.xpath('number').text %>"><%= state_element.xpath('number').text %></option>
       			<% end %>
