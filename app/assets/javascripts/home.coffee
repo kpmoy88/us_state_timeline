@@ -50,6 +50,8 @@ nextStateSlide = ->
   curState++
   $('.timeline_section').animate { scrollLeft: '+=230' }, 100
   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
+  if curState == 50 
+    stopAutoSlide()
   return
 
 #Changes map image, current state number and changes classes on state
@@ -61,7 +63,17 @@ prevStateSlide = ->
    curState--
    #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
    $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
+   if curState == 0 
+    stopAutoSlide()
    return
+
+#Stop autoplay or autoreverse
+stopAutoSlide = ->
+    turnOnButtons()
+    $('#stopUSstate').prop 'disabled', true
+    clearInterval intervalHolder
+    return
+  
 
 #Variable for stopping interval
 intervalHolder = undefined
@@ -81,6 +93,15 @@ $(document).ready ->
     turnOnButtons()
     $('#stopUSstate').prop 'disabled', true
     clearInterval intervalHolder
+    return
+  return
+#Goes through state timeline without user input in reverse
+$(document).ready ->
+  $('#reverseUSstate').click ->
+    if curState >= 1
+      disableButtons()
+      $('#stopUSstate').prop 'disabled', false
+      intervalHolder = setInterval(prevStateSlide, 1000)
     return
   return
 
@@ -125,6 +146,7 @@ $(document).ready ->
 disableButtons = ->
   console.log "Disabled Buttons"
   $('#playUSstate').prop 'disabled', true
+  $('#reverseUSstate').prop 'disabled', true
   $('.prevUSstate').prop 'disabled', true
   $('.nextUSstate').prop 'disabled', true
   $('#ddl_states_name').prop 'disabled', true
@@ -142,16 +164,19 @@ turnOnButtons = ->
   $('#tl_right_div').removeClass "deactivate"
   if curState == 0
     $('#playUSstate').prop 'disabled', false
+    $('#reverseUSstate').prop 'disabled', true
     $('.prevUSstate').prop 'disabled', true
     $('.nextUSstate').prop 'disabled', false
     $('#tl_left_div').addClass "deactivate"
   else if curState == 50
     $('#playUSstate').prop 'disabled', true
+    $('#reverseUSstate').prop 'disabled', false
     $('.prevUSstate').prop 'disabled', false
     $('.nextUSstate').prop 'disabled', true
     $('#tl_right_div').addClass "deactivate"
   else
     $('#playUSstate').prop 'disabled', false
+    $('#reverseUSstate').prop 'disabled', false
     $('.prevUSstate').prop 'disabled', false
     $('.nextUSstate').prop 'disabled', false
       

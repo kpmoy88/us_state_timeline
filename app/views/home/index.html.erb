@@ -78,6 +78,9 @@
 				<% end %>
 			</div>
 			<div class="autoplay_area">
+				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "reverseUSstate", :disabled => true) do %>
+					<i class="fa fa-fast-backward" aria-hidden="true"></i> Reverse 
+				<% end %>
 				<%= button_tag(:class => "timeline_btn", :type => "button", :id => "stopUSstate", :disabled => true) do %>
 					<i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop
 				<% end %>
