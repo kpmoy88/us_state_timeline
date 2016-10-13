@@ -46,7 +46,6 @@ nextStateSlide = ->
   first = $('.tb_state.not-visible').first()
   first.removeClass ' not-visible '
   first.addClass ' visible '
-  first.toggle()
   curState++
   $('.timeline_section').animate { scrollLeft: '+=230' }, 100
   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
@@ -60,7 +59,6 @@ prevStateSlide = ->
   last = $('.tb_state.visible').last()
   last.removeClass ' visible '
   last.addClass ' not-visible '
-  last.toggle()
   curState--
   #$('.timeline_section').animate { scrollLeft: '-=230' }, 100
   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')

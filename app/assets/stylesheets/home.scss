@@ -113,15 +113,22 @@
 }
 
 /* Timeline Block */
- .timeline_block {
+.timeline_block {
   vertical-align: top;
   //background-color: #FFF;
   text-align: center;
-  margin: 10px 0px 10px 30px;
-	min-width: 200px;
-	 &.tb_state, &.tb_last {
+  margin: 10px 0px 10px 15px;
+	padding-right: 30px;
+	min-width: 150px;
+	&.tb_state, &.tb_last {
 		 display: none;
-	 }
+	}
+	&.not-visible {
+		display: none;
+	}
+	&.visible {
+		display: block;
+	}
 }
 
 /* State circle with numbered Star */
@@ -148,9 +155,14 @@
 	}
 }
 
-.timeline_date {
-	margin-top: 10px;
-	font-weight: bold;
+.arrow-up {
+    height: 0px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #d7e4ed;
+    width: 8px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .timeline_content {
@@ -161,12 +173,17 @@
 		padding: 10% 0;
 	}
 	&.tc_state {
-		width: 90%;
+		width: 150px;
     margin-left: auto;
     margin-right: auto;
+		border-radius: 25px;
 	}
 	&.tc_last {
 		margin-right: 30px;
+	}
+	.timeline_date {
+		padding-top: 10px;
+		font-weight: bold;
 	}
 }
 
