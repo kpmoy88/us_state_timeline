@@ -64,6 +64,7 @@ prevStateSlide = ->
   $('.map_image').attr 'src', $('#state_el_' + curState).data('map-image')
   setQuickSelectValues()
   if curState == 0 
+    $('.map_image').attr 'src', $('.tc_first').data('map-image')
     stopAutoSlide()
   return
 
