@@ -1,6 +1,6 @@
 <div class="title_container"><h1 class="web_title">U.S. States by Date of Admission to the Union</h1></div>
 <section class="map_section">
-	<%= image_tag( asset_path("us_0.gif"), :alt => "us_map", class: "map_image") %>
+	<%= image_tag( asset_path("us_0.gif"), width: '795', height: '517', :usemap => "#us_map", :alt => "us_map", class: "map_image", id:"map_image") %>
 	<% @states.xpath('//state').each do | state_element | %>
   	<%= image_tag("us_" + state_element.xpath('number').text + ".gif", :alt => "us_map", class: "map_image_hide") %>
 	<% end %>

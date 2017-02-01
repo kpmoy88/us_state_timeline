@@ -10,6 +10,26 @@ $(window).resize ->
   $('.timeline_section').scrollLeft document.getElementById('timeline_container').scrollWidth
   return
 
+#Load jQuery plugin for responsive usemap
+$(document).ready ->
+  $('img[usemap]').rwdImageMaps()
+  return
+
+#Get coordinates of image
+$(document).ready ->
+  $('.map_image').click (e) ->
+    offset = $(this).offset()
+    alert (e.pageX - (offset.left)).toString() + ', ' + (e.pageY - (offset.top)).toString()
+    return
+  return
+$(document).ready ->
+  $('.coords').click (e) ->
+    offset = undefined
+    offset = $(this).offset()
+    alert (e.pageX - (offset.left)).toString() + ', ' + (e.pageY - (offset.top)).toString()
+    return
+  return
+
 #Start US State timeline
 $(document).ready ->
   $('#startTimeline').click ->
