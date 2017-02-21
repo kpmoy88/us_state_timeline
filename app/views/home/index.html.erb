@@ -38,13 +38,11 @@
 												}
 							) %>
 				<div class="circle"><i class="fa fa-star" aria-hidden="true"></i><span class="num_state"><%= state_element.xpath('number').text %></span></div>
-				<div class="arrow-up"></div>
       	<div class="timeline_content tc_state">
 					<p class="timeline_date"> <%= state_element.xpath('month').text %> <%= state_element.xpath('day').text %>, <%= state_element.xpath('year').text %></p>
 					<%= image_tag( state_element.xpath('state_image').text + ".jpg", class: "state_image") %>
-					<p class="state_name"><%= state_element.xpath('name').text %></p>
 					<%= button_tag(:class => "state_btn", :type => "button", :data => {state_id: state_element.xpath('number').text} ) do %>
-						<i class="fa fa-info-circle" aria-hidden="true"></i> More Info
+						<%= state_element.xpath('name').text %>
 					<% end %>
       	</div>
    		</div>
