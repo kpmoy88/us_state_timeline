@@ -208,9 +208,9 @@ turnOnButtons = ->
 $(document).ready ->
   $('.state_btn').click ->
     document.getElementById('modal_state_name').innerHTML = $('#state_el_' + $(this).data('state-id')).data('state-name')
-    $('#modal_state_img').attr 'src', $('#state_el_' + curState).data('state-image')
+    $('#modal_state_img').attr 'src', $('#state_el_' + $(this).data('state-id')).data('state-image')
     document.getElementById('modal_union_date').innerHTML = "<span>Entered Union:</span><br />" + $('#state_el_' + $(this).data('state-id')).data('enter-union')
-    $('#state_facts').attr 'href', $('#state_el_' + curState).data('facts-link')
+    $('#state_facts').attr 'href', $('#state_el_' + $(this).data('state-id')).data('facts-link')
     document.getElementById('stateModal').style.display = 'block'
     return
   return
